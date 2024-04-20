@@ -10,7 +10,8 @@
 </head>
 <body>
     <header> 
-        @include('asidbare.aside') 
+       <aside> @include('asidbare.aside') </aside>
+       <nav> @include('navebare.nave')</nav>
     </header>
     <section>
       <center>  @yield('content')</center>

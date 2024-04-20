@@ -12,54 +12,86 @@ class MarquesController extends Controller
      */
     public function index()
     {
-        //
+        $marques = Marques::all();
+        return view('marques.index', compact('marques'));
     }
 
     /**
      * Show the form for creating a new resource.
+     *
+     
      */
     public function create()
     {
-        //
+        return view('marques.create');
     }
 
     /**
      * Store a newly created resource in storage.
+     *
+     
      */
     public function store(Request $request)
-    {
-        //
-    }
+{
+    $request->validate([
+        'marque' => 'required|string|max:255'
+    ]);
+
+    // Create a new Marque instance using the create method
+    Marques::create($request->post());
+
+    return redirect('/marques')->with('success', 'Marque ajoutée avec succès.');
+}
+
 
     /**
      * Display the specified resource.
+     *
+
      */
-    public function show(marques $marques)
+    public function show( $id)
     {
-        //
+        return view('marques.show', compact('marque'));
     }
 
     /**
      * Show the form for editing the specified resource.
+     *
+    
      */
-    public function edit(marques $marques)
-    {
-        //
+    public function edit($id)
+    { $marques = Marques::findOrFail($id);
+        return view('marques.edit', compact('marque'));
     }
 
     /**
      * Update the specified resource in storage.
+     *
+     
      */
-    public function update(Request $request, marques $marques)
+    public function update(Request $request, Marques $marque)
     {
-        //
+        $request->validate([
+            'marque' => 'required|string|max:255'
+        ]);
+
+        $marque->update($request->all());
+
+        return redirect()->route('marques.index')
+            ->with('success', 'Marque updated successfully.');
     }
 
     /**
      * Remove the specified resource from storage.
+     *
+     *
      */
-    public function destroy(marques $marques)
+    public function destroy(string $id)
     {
-        //
+        $marque =Marques::findOrFail($id);
+        $marque->delete();
+
+        return redirect()->route('marques.index')
+            ->with('success', 'Marque deleted successfully.');
     }
 }

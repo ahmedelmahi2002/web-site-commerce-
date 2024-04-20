@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('marques', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->string('marque');
+            $table->timestamps();
+            
         });
     }
 
