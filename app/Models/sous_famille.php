@@ -12,9 +12,6 @@ class sous_famille extends Model
     {
         return $this->hasMany(Product::class);
     }
-    public function products()
-    {
-        return $this->hasMany(Product::class);
-    }
+   
     use HasFactory;
 }

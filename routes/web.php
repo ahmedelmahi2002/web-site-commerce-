@@ -2,7 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FamilleController;
-
+use App\Http\Controllers\SousFamilleController;
+use App\Http\Controllers\MarquesController;
+use App\Http\Controllers\UnitesController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,3 +21,6 @@ use App\Http\Controllers\FamilleController;
 // });
 
 Route::resource('familles', FamilleController::class);
+Route::resource('sous_familles', SousFamilleController::class);
+Route::resource('marques', MarquesController::class);
+Route::resource('unites', UnitesController::class);

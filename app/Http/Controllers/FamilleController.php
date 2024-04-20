@@ -36,11 +36,11 @@ class FamilleController extends Controller
 
         $imageName = time().'.'.$request->image->extension();  
      
-        $filePath = $request->file('image')->store('imageFamilie','public');
+        // $filePath = $request->file('image')->store('imageFamilie','public');
 
         $famille = new Famille([
             'libelle' => $request->get('libelle'),
-            'image' => $filePath
+            'image' => $imageName
         ]);
 
         $famille->save();
@@ -51,7 +51,7 @@ class FamilleController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Famille $id)
+    public function show( $id)
     {
         $famille = Famille::find($id);
         return view('familles.show', compact('famille'));
@@ -60,10 +60,15 @@ class FamilleController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Famille $id)
+    public function edit( $id)
     {
-        $famille = Famille::find($id);
+        // $famille = Famille::find($id);
+        // return view('familles.edit', compact('famille'));
+        // $famille = Famille::findOrFail($id);
+        // return view('familles.edit',['famille'=>$famille]);
+        $famille = Famille::findOrFail($id);
         return view('familles.edit', compact('famille'));
+        
     }
 
     /**
@@ -93,11 +98,10 @@ class FamilleController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Famille $id)
+    public function destroy(string $id)
     {
-        $famille = Famille::find($id);
+        $famille =Famille::findOrFail($id);
         $famille->delete();
-
-        return redirect('/familles')->with('success', 'Famille supprimée avec succès.');
+        return redirect()->route('familles.index')->with('success','famille has been deleted successfully');
     }
 }
