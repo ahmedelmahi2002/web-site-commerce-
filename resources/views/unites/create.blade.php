@@ -205,20 +205,20 @@
 
 
 
-    <div class="formbold-main-wrapper" id="yy">
+    <div class="formbold-main-wrapper">
         <!-- Author: FormBold Team -->
         <!-- Learn More: https://formbold.com -->
         <div class="formbold-form-wrapper">
-            <form action="{{ route('marques.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('unites.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="formbold-mb-5">
-                    <label for="marque" class="formbold-form-label">Marque:</label>
-                    <input type="text" name="marque" id="marque" required placeholder="Enter your marque"
+                    <label for="unite" class="formbold-form-label">Unite:</label>
+                    <input type="text" name="unite" id="unite" required placeholder="Enter your marque"
                         class="formbold-form-input" />
                 </div>
     
                 <div>
-                    <button type="submit" class="formbold-btn w-full">Create Marque</button>
+                    <button type="submit" class="formbold-btn w-full">Create Unite</button>
                 </div>
             </form>
         </div>

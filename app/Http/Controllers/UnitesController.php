@@ -7,59 +7,69 @@ use Illuminate\Http\Request;
 
 class UnitesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+  
     public function index()
     {
-        //
+        $unites = Unites::all();
+        return view('unites.index', compact('unites'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+  
     public function create()
     {
-        //
+        return view('unites.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+   
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'unite' => 'required|string|max:255'
+        ]);
+
+        Unites::create($request->all());
+
+        return redirect()->route('unites.index')
+            ->with('success', 'Unite created successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(unites $unites)
+   
+    
+    public function show(Unites $unite)
     {
-        //
+        return view('unites.show', compact('unite'));
     }
 
     /**
      * Show the form for editing the specified resource.
+     *
+    
      */
-    public function edit(unites $unites)
+    public function edit( $id)
     {
-        //
+        $unites = Unites::findOrFail($id);
+        return view('unites.edit', compact('unites'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, unites $unites)
+ 
+    public function update(Request $request, Unites $unite)
     {
-        //
+        $request->validate([
+            'unite' => 'required|string|max:255'
+        ]);
+
+        $unite->update($request->all());
+
+        return redirect()->route('unites.index')
+            ->with('success', 'Unite updated successfully.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(unites $unites)
+
+    public function destroy(Unites $unite)
     {
-        //
+        $unite->delete();
+
+        return redirect()->route('unites.index')
+            ->with('success', 'Unite deleted successfully.');
     }
 }

@@ -51,7 +51,8 @@ class MarquesController extends Controller
      */
     public function show( $id)
     {
-        return view('marques.show', compact('marque'));
+        $marques = Marques::find($id);
+        return view('marques.show', compact('marques'));
     }
 
     /**
@@ -61,7 +62,7 @@ class MarquesController extends Controller
      */
     public function edit($id)
     { $marques = Marques::findOrFail($id);
-        return view('marques.edit', compact('marque'));
+        return view('marques.edit', compact('marques'));
     }
 
     /**
