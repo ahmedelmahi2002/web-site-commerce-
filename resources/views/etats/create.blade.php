@@ -1,13 +1,15 @@
-@extends('layouts.layout')
 
+@extends('layouts.layout')
 @section('content')
+    
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Edit Famille</title>
+    <title>Document</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
         * {
@@ -193,15 +195,10 @@
           }
         }
       </style>
+      
 </head>
 <body>
-   
-
-
-
-
-
-
+ 
 
 
 
@@ -209,40 +206,24 @@
 
 
     <div class="formbold-main-wrapper">
-      <!-- Author: FormBold Team -->
-      <!-- Learn More: https://formbold.com -->
-      <div class="formbold-form-wrapper">
-        <div class="pull-left">
-          <h2>Edit Unite</h2>
-      </div>
-      <div class="pull-right">
-          <a class="btn btn-primary" href="{{ route('unites.index') }}">Back</a>
-      </div>
-        <form method="POST" action="{{ route('unites.update', $unites->id) }}" enctype="multipart/form-data" >
-          @csrf
-          @method('PUT')
-          <div class="formbold-mb-5">
-            <label for="libelle">unite</label>
-            <input id="unite"  class="formbold-form-input" type="text" class="form-control @error('unites') is-invalid @enderror" name="unite" value="{{ old('unites', $unites->unite) }}" required autocomplete="marque" autofocus>
-
-            @error('unites')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-            @enderror
-          </div>
+        <!-- Author: FormBold Team -->
+        <!-- Learn More: https://formbold.com -->
+        <div class="formbold-form-wrapper">
+            <form action="{{ route('etats.store') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="formbold-mb-5">
+                    <label for="unite" class="formbold-form-label">etats:</label>
+                    <input type="text" name="etats" id="etats" required placeholder="Enter your etats"
+                        class="formbold-form-input" />
+                </div>
     
-        
-    
-          <div>
-            <button type="submit" class="formbold-btn w-full">update unite</button>
-          </div>
-        </form>
-      </div>
+                <div>
+                    <button type="submit" class="formbold-btn w-full">Create etats</button>
+                </div>
+            </form>
+        </div>
     </div>
-
-
- 
+    
 </body>
 </html>
 @endsection

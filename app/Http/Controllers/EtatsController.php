@@ -12,7 +12,8 @@ class EtatsController extends Controller
      */
     public function index()
     {
-        //
+        $etats = Etats::all();
+        return view('etats.index', compact('etats'));
     }
 
     /**
@@ -20,7 +21,7 @@ class EtatsController extends Controller
      */
     public function create()
     {
-        //
+        return view('etats.create');
     }
 
     /**
@@ -28,38 +29,54 @@ class EtatsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $etats = new Etats;
+        $etats->etats = $request->etats;
+        $etats->save();
+        return redirect()->route('etats.index');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(etats $etats)
+    public function show($id)
     {
-        //
+        $etats = Etats::find($id);
+        return view('etats.show', compact('etats'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(etats $etats)
-    {
-        //
+    public function edit( $id)
+    { $etats = Etats::findOrFail($id);
+        return view('etats.edit', compact('etats'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, etats $etats)
+    public function update(Request $request, Etats $etat)
     {
-        //
+        $request->validate([
+            'etats' => 'required|string',
+        ]);
+
+        $etat->update($request->all());
+
+        return redirect()->route('etats.index')
+            ->with('success', 'Etat updated successfully');
     }
+    
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(etats $etats)
+    public function destroy(string $id)
     {
-        //
+        $etats =Etats::findOrFail($id);
+        $etats->delete();
+
+        return redirect()->route('etats.index')
+            ->with('success', 'etats deleted successfully.');
     }
 }

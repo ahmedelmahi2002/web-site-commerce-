@@ -5,6 +5,7 @@ use App\Http\Controllers\FamilleController;
 use App\Http\Controllers\SousFamilleController;
 use App\Http\Controllers\MarquesController;
 use App\Http\Controllers\UnitesController;
+use App\Http\Controllers\EtatsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,3 +25,4 @@ Route::resource('familles', FamilleController::class);
 Route::resource('sous_familles', SousFamilleController::class);
 Route::resource('marques', MarquesController::class);
 Route::resource('unites', UnitesController::class);
+Route::resource('etats', EtatsController::class);

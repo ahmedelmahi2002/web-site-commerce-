@@ -213,19 +213,19 @@
       <!-- Learn More: https://formbold.com -->
       <div class="formbold-form-wrapper">
         <div class="pull-left">
-          <h2>Edit Unite</h2>
+          <h2>Edit etats</h2>
       </div>
       <div class="pull-right">
-          <a class="btn btn-primary" href="{{ route('unites.index') }}">Back</a>
+          <a class="btn btn-primary" href="{{ route('etats.index') }}">Back</a>
       </div>
-        <form method="POST" action="{{ route('unites.update', $unites->id) }}" enctype="multipart/form-data" >
+        <form method="POST" action="{{ route('etats.update', $etats->id) }}" enctype="multipart/form-data" >
           @csrf
           @method('PUT')
           <div class="formbold-mb-5">
-            <label for="libelle">unite</label>
-            <input id="unite"  class="formbold-form-input" type="text" class="form-control @error('unites') is-invalid @enderror" name="unite" value="{{ old('unites', $unites->unite) }}" required autocomplete="marque" autofocus>
+            <label for="etats">etats</label>
+            <input id="etats"  class="formbold-form-input" type="text" class="form-control @error('etats') is-invalid @enderror" name="etats" value="{{ old('etats', $etats->etats) }}" required autocomplete="etats" autofocus>
 
-            @error('unites')
+            @error('etats')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
@@ -235,7 +235,7 @@
         
     
           <div>
-            <button type="submit" class="formbold-btn w-full">update unite</button>
+            <button type="submit" class="formbold-btn w-full">update etats</button>
           </div>
         </form>
       </div>
