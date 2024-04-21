@@ -213,7 +213,7 @@
                 @csrf
                 <div class="formbold-mb-5">
                     <label for="unite" class="formbold-form-label">Unite:</label>
-                    <input type="text" name="unite" id="unite" required placeholder="Enter your marque"
+                    <input type="text" name="unite" id="unite" required placeholder="Enter your Unite"
                         class="formbold-form-input" />
                 </div>
     
