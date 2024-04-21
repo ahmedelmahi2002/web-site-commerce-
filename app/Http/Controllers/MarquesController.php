@@ -13,7 +13,7 @@ class MarquesController extends Controller
     public function index()
     {
         $marques = Marques::all();
-        return view('marques.index', compact('marques'));
+        return view('Dashborde.marques.index', compact('marques'));
     }
 
     /**
@@ -23,7 +23,7 @@ class MarquesController extends Controller
      */
     public function create()
     {
-        return view('marques.create');
+        return view('Dashborde.marques.create');
     }
 
     /**
@@ -52,7 +52,7 @@ class MarquesController extends Controller
     public function show( $id)
     {
         $marques = Marques::find($id);
-        return view('marques.show', compact('marques'));
+        return view('Dashborde.marques.show', compact('marques'));
     }
 
     /**
@@ -62,7 +62,7 @@ class MarquesController extends Controller
      */
     public function edit($id)
     { $marques = Marques::findOrFail($id);
-        return view('marques.edit', compact('marques'));
+        return view('Dashborde.marques.edit', compact('marques'));
     }
 
     /**
@@ -70,16 +70,16 @@ class MarquesController extends Controller
      *
      
      */
-    public function update(Request $request, Marques $marque)
+    public function update(Request $request, Marques $id)
     {
         $request->validate([
             'marque' => 'required|string|max:255'
         ]);
-
+        $marque = Marques::find($id);
         $marque->update($request->all());
 
         return redirect()->route('marques.index')
-            ->with('success', 'Marque updated successfully.');
+            ->with('success', 'Unite updated successfully.');
     }
 
     /**

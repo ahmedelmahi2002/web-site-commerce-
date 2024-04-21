@@ -14,7 +14,7 @@ class SousFamilleController extends Controller
     public function index()
     {
         $sousFamilles = sous_famille::all();
-        return view('sous_familles.index', compact('sousFamilles'));
+        return view('Dashborde.sous_familles.index', compact('sousFamilles'));
         
     }
 
@@ -24,7 +24,7 @@ class SousFamilleController extends Controller
     public function create()
     {
         $familles = Famille::all();
-        return view('sous_familles.create',compact('familles'));
+        return view('Dashborde.sous_familles.create',compact('familles'));
     }
 
     /**
@@ -70,7 +70,7 @@ class SousFamilleController extends Controller
     {
         $familles = Famille::all();
         $sous_famille = sous_famille::findOrFail($id);
-        return view('sous_familles.edit', compact('sous_famille','familles'));
+        return view('Dashborde.sous_familles.edit', compact('sous_famille','familles'));
     }
 
     /**

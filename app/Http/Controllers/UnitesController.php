@@ -11,13 +11,13 @@ class UnitesController extends Controller
     public function index()
     {
         $unites = Unites::all();
-        return view('unites.index', compact('unites'));
+        return view('Dashborde.unites.index', compact('unites'));
     }
 
   
     public function create()
     {
-        return view('unites.create');
+        return view('Dashborde.unites.create');
     }
 
    
@@ -29,7 +29,7 @@ class UnitesController extends Controller
 
         Unites::create($request->all());
 
-        return redirect()->route('unites.index')
+        return redirect()->route('Dashborde.unites.index')
             ->with('success', 'Unite created successfully.');
     }
 
@@ -37,7 +37,7 @@ class UnitesController extends Controller
     
     public function show(Unites $unite)
     {
-        return view('unites.show', compact('unite'));
+        return view('Dashborde.unites.show', compact('unite'));
     }
 
     /**
@@ -48,7 +48,7 @@ class UnitesController extends Controller
     public function edit( $id)
     {
         $unites = Unites::findOrFail($id);
-        return view('unites.edit', compact('unites'));
+        return view('Dashborde.unites.edit', compact('unites'));
     }
 
  
