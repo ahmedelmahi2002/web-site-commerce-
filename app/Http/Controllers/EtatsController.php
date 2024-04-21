@@ -13,7 +13,7 @@ class EtatsController extends Controller
     public function index()
     {
         $etats = Etats::all();
-        return view('etats.index', compact('etats'));
+        return view('Dashborde.etats.index', compact('etats'));
     }
 
     /**
@@ -21,7 +21,7 @@ class EtatsController extends Controller
      */
     public function create()
     {
-        return view('etats.create');
+        return view('Dashborde.etats.create');
     }
 
     /**
@@ -32,7 +32,7 @@ class EtatsController extends Controller
         $etats = new Etats;
         $etats->etats = $request->etats;
         $etats->save();
-        return redirect()->route('etats.index');
+        return redirect()->route('Dashborde.etats.index');
     }
 
     /**
@@ -41,7 +41,7 @@ class EtatsController extends Controller
     public function show($id)
     {
         $etats = Etats::find($id);
-        return view('etats.show', compact('etats'));
+        return view('Dashborde.etats.show', compact('etats'));
     }
 
     /**
@@ -49,7 +49,7 @@ class EtatsController extends Controller
      */
     public function edit( $id)
     { $etats = Etats::findOrFail($id);
-        return view('etats.edit', compact('etats'));
+        return view('Dashborde.etats.edit', compact('etats'));
     }
 
     /**
@@ -63,7 +63,7 @@ class EtatsController extends Controller
 
         $etat->update($request->all());
 
-        return redirect()->route('etats.index')
+        return redirect()->route('Dashborde.etats.index')
             ->with('success', 'Etat updated successfully');
     }
     

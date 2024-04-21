@@ -14,7 +14,7 @@ class FamilleController extends Controller
     {
         {
             $familles = Famille::all();
-            return view('familles.index', compact('familles'));
+            return view('Dashborde.familles.index', compact('familles'));
         }
     }
 
@@ -23,7 +23,7 @@ class FamilleController extends Controller
      */
     public function create()
     {
-        return view('familles.create');
+        return view('Dashborde.familles.create');
     }
 
     /**
@@ -54,7 +54,7 @@ class FamilleController extends Controller
     public function show( $id)
     {
         $famille = Famille::find($id);
-        return view('familles.show', compact('famille'));
+        return view('Dashborde.familles.show', compact('famille'));
     }
 
     /**
@@ -67,7 +67,7 @@ class FamilleController extends Controller
         // $famille = Famille::findOrFail($id);
         // return view('familles.edit',['famille'=>$famille]);
         $famille = Famille::findOrFail($id);
-        return view('familles.edit', compact('famille'));
+        return view('Dashborde.familles.edit', compact('famille'));
         
     }
 
