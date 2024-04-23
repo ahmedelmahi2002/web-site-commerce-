@@ -1,4 +1,4 @@
-@extends('Dashborde.layouts.layout')
+@extends('admin.layouts.layout')
 @section('content')
 
 <!DOCTYPE html>

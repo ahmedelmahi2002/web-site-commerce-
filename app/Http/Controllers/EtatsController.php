@@ -32,7 +32,7 @@ class EtatsController extends Controller
         $etats = new Etats;
         $etats->etats = $request->etats;
         $etats->save();
-        return redirect()->route('Dashborde.etats.index');
+        return redirect()->route('etats.index');
     }
 
     /**
@@ -63,7 +63,7 @@ class EtatsController extends Controller
 
         $etat->update($request->all());
 
-        return redirect()->route('Dashborde.etats.index')
+        return redirect()->route('etats.index')
             ->with('success', 'Etat updated successfully');
     }
     

@@ -29,7 +29,7 @@ class UnitesController extends Controller
 
         Unites::create($request->all());
 
-        return redirect()->route('Dashborde.unites.index')
+        return redirect()->route('unites.index')
             ->with('success', 'Unite created successfully.');
     }
 

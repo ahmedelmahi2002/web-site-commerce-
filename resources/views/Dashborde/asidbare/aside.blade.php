@@ -8,16 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Melody Admin</title>
   <!-- plugins:css -->
-  <link rel="stylesheet" href="vendors/iconfonts/font-awesome/css/all.min.css">
-  <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
-  <link rel="stylesheet" href="vendors/css/vendor.bundle.addons.css">
-  <!-- endinject -->
-  <!-- plugin css for this page -->
-  <!-- End plugin css for this page -->
-  <!-- inject:css -->
-  <link rel="stylesheet" href="css/style.css">
-  <!-- endinject -->
-  <link rel="shortcut icon" href="http://www.urbanui.com/" />
+
   <style>
     #sidebar{position: absolute;
     top: 70px;}
@@ -115,15 +106,13 @@
       <li class="nav-item">
         <a class="nav-link" data-toggle="collapse" href="#apps" aria-expanded="false" aria-controls="apps">
           <i class="fas fa-briefcase menu-icon"></i>
-          <span class="menu-title">Apps</span>
+          <span class="menu-title">produits</span>
           <i class="menu-arrow"></i>
         </a>
         <div class="collapse" id="apps">
           <ul class="nav flex-column sub-menu">
-            <li class="nav-item"> <a class="nav-link" href="pages/apps/email.html"> Email </a></li>
-            <li class="nav-item"> <a class="nav-link" href="pages/apps/calendar.html"> Calendar </a></li>
-            <li class="nav-item"> <a class="nav-link" href="pages/apps/todo.html"> Todo </a></li>
-            <li class="nav-item"> <a class="nav-link" href="pages/apps/gallery.html"> Gallery </a></li>
+            <li class="nav-item"> <a class="nav-link" href="{{route('produits.index')}}"> produits </a></li>
+       
           </ul>`
         </div>
       </li>
@@ -149,21 +138,7 @@
       </li>
     </ul>
   </nav>
-  <script src="vendors/js/vendor.bundle.base.js"></script>
-  <script src="vendors/js/vendor.bundle.addons.js"></script>
-  <!-- endinject -->
-  <!-- Plugin js for this page-->
-  <!-- End plugin js for this page-->
-  <!-- inject:js -->
-  <script src="js/off-canvas.js"></script>
-  <script src="js/hoverable-collapse.js"></script>
-  <script src="js/misc.js"></script>
-  <script src="js/settings.js"></script>
-  <script src="js/todolist.js"></script>
-  <!-- endinject -->
-  <!-- Custom js for this page-->
-  <script src="js/dashboard.js"></script>
-  <!-- End custom js for this page-->
+  
 </body>
 
 

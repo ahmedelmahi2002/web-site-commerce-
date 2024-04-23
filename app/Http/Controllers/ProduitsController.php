@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\produits;
+use App\Models\marques;
+use App\Models\unites;
+use App\Models\sous_famille;
 use Illuminate\Http\Request;
 
 class ProduitsController extends Controller
@@ -13,59 +16,65 @@ class ProduitsController extends Controller
         public function index()
         {
             $produits = Produits::all();
-            return view('produits.index', compact('produits'));
+            return view('Dashborde.produits.index', compact('produits'));
         }
     
      
         public function create()
         {
-            return view('produits.create');
+            $marques = Marques::all();
+            $unites = Unites::all();
+            $sousFamilles = sous_famille::all();
+            return view('Dashborde.produits.create',compact('sousFamilles','marques','unites'));
         }
     
     
         public function store(Request $request)
         {
             $request->validate([
-                'codebarre' => 'required|numeric|unique:produits',
-                'designation' => 'required|string',
-                'prix_ht' => 'required|numeric',
-                'tva' => 'required|numeric',
-                'description' => 'required|string',
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-                'sous_famille_id' => 'required|exists:sous_familles,id',
-                'marque_id' => 'required|exists:marques,id',
-                'unite_id' => 'required|exists:unites,id',
+                'codebarre' => 'required',
+                'designation' => 'required',
+                'prix_ht' => 'required',
+                'tva' => 'required',
+                'description' => 'required',
+                'image' => 'required|image',
+                'sous_famille_id' => 'required',
+                'marque_id' => 'required',
+                'unite_id' => 'required',
             ]);
     
-            $imageName = time().'.'.$request->image->extension();  
+
          
-            $request->image->move(public_path('images'), $imageName);
+             $imagePath = $request->file('image')->store('image','public');
     
-            $produit = Produits::create([
-                'codebarre' => $request->codebarre,
-                'designation' => $request->designation,
-                'prix_ht' => $request->prix_ht,
-                'tva' => $request->tva,
-                'description' => $request->description,
-                'image' => $imageName,
-                'sous_famille_id' => $request->sous_famille_id,
-                'marque_id' => $request->marque_id,
-                'unite_id' => $request->unite_id,
+            $produit = new Produits([
+                'codebarre' => $request->get('codebarre'),
+                'designation' => $request->get('designation'),
+                'prix_ht' => $request->get('prix_ht'),
+                'tva' => $request->get('tva'),
+                'description' => $request->get('description'),
+                'image' => $imagePath,
+                'sous_famille_id' => $request->get('sous_famille_id'),
+                'marque_id' => $request->get('marque_id'),
+                'unite_id' => $request->get('unite_id'),
             ]);
-    
-            return redirect()->route('produits.index')
-                             ->with('success', 'Produit created successfully.');
+            $produit ->save();
+           return redirect('/produits')->with('success', 'produits ajoutée avec succès.');
         }
     
        
         public function show(Produits $produit)
         {
-            return view('produits.show', compact('produit'));
+            return view('Dashborde.produits.show', compact('produit'));
         }
     
-        public function edit(Produits $produit)
+        public function edit( $id)
         {
-            return view('produits.edit', compact('produit'));
+            $marques = Marques::all();
+            $unites = Unites::all();
+            $sousFamilles = sous_famille::all();
+            $produit = Produits::findOrFail($id);
+            return view('Dashborde.produits.edit', compact('produit','sousFamilles','marques','unites'));
         }
     
      
@@ -83,30 +92,34 @@ class ProduitsController extends Controller
             ]);
     
             if ($request->hasFile('image')) {
-                $imageName = time().'.'.$request->image->extension();  
-                $request->image->move(public_path('images'), $imageName);
-                $produit->image = $imageName;
+                // Store the new image file
+                $imagePath = $request->file('image')->store('images', 'public');
+                // Update the image path attribute of the famille model
+                $produit->image = $imagePath;
             }
     
-            $produit->designation = $request->designation;
-            $produit->prix_ht = $request->prix_ht;
-            $produit->tva = $request->tva;
-            $produit->description = $request->description;
-            $produit->sous_famille_id = $request->sous_famille_id;
-            $produit->marque_id = $request->marque_id;
-            $produit->unite_id = $request->unite_id;
+            // Update other attributes
+            $produit->designation = $request->input('designation');
+            $produit->prix_ht = $request->input('prix_ht');
+            $produit->tva = $request->input('tva');
+            $produit->description = $request->input('description');
+            $produit->sous_famille_id = $request->input('sous_famille_id');
+            $produit->marque_id = $request->input('marque_id');
+            $produit->unite_id = $request->input('unite_id');
+    
+            // Save the updated model
             $produit->save();
     
-            return redirect()->route('produits.index')
-                             ->with('success', 'Produit updated successfully.');
+            return redirect()->route('produits.index');
         }
     
        
-        public function destroy(Produits $produit)
+        public function destroy(string $id)
         {
+            $produit =Produits::findOrFail($id);
             $produit->delete();
     
             return redirect()->route('produits.index')
-                             ->with('success', 'Produit deleted successfully.');
+                ->with('success', 'produits deleted successfully.');
         }
 }
