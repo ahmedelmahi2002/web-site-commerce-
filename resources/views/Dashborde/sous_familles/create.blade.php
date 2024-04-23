@@ -103,7 +103,7 @@
       
         .formbold-file-input input {
           opacity: 0;
-          position: absolute;
+          position: relative;
           width: 100%;
           height: 100%;
         }

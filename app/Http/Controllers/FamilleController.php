@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Famille;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Storage;
 class FamilleController extends Controller
 {
     /**
@@ -34,13 +34,13 @@ class FamilleController extends Controller
        
         
 
-        $imageName = time().'.'.$request->image->extension();  
+        // $imageName = time().'.'.$request->image->extension();  
      
-        // $filePath = $request->file('image')->store('imageFamilie','public');
+        $imagePath = $request->file('image')->store('image','public');
 
         $famille = new Famille([
             'libelle' => $request->get('libelle'),
-            'image' => $imageName
+            'image' => $imagePath
         ]);
 
         $famille->save();
@@ -74,27 +74,27 @@ class FamilleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Famille $id)
+    public function update(Request $request, Famille $famille)
     {
         $request->validate([
             'libelle' => 'required',
-            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
         ]);
-
-        $famille = Famille::find($id);
-
         if ($request->hasFile('image')) {
-            $imageName = time().'.'.$request->image->extension();  
-            $request->image->move(public_path('images'), $imageName);
-            $famille->image = $imageName;
+            // Store the new image file
+            $imagePath = $request->file('image')->store('images', 'public');
+            // Update the image path attribute of the famille model
+            $famille->image = $imagePath;
         }
 
-        $famille->libelle = $request->get('libelle');
+        // Update other attributes
+        $famille->libelle = $request->input('libelle');
+
+        // Save the updated model
         $famille->save();
 
-        return redirect('/familles')->with('success', 'Famille mise à jour avec succès.');
+        return redirect()->route('familles.index');
     }
-
     /**
      * Remove the specified resource from storage.
      */

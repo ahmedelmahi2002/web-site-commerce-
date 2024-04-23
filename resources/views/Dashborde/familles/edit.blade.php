@@ -1,4 +1,4 @@
-@extends('Dashborde.layouts.layout')
+@extends('admin.layouts.layout')
 
 @section('content')
 <!DOCTYPE html>
@@ -102,7 +102,7 @@
       
         .formbold-file-input input {
           opacity: 0;
-          position: absolute;
+          position: relative;
           width: 100%;
           height: 100%;
         }
@@ -295,7 +295,7 @@
             </label>
     
             <div class="formbold-mb-5 formbold-file-input">
-              <input type="file" name="image" id="file" class="form-control-file @error('image') is-invalid @enderror" name="image" />
+              <input type="file" name="image" id="file" class="form-control-file @error('image') is-invalid @enderror" name="image" value="{{ old('image', $famille->image) }}" required autocomplete="image" autofocus name="image" />
               <label for="file">
                 <div>
                   <span class="formbold-drop-file"> Drop image here </span>
@@ -303,14 +303,7 @@
                   <span class="formbold-browse"> Browser </span>
                 </div>
               </label>
-              @if($famille->image)
-              <div>
-                  Current Image:
-                  <img src="{{ asset('storage/' . $famille->image) }}" alt="Current Image">
-              </div>
-          @else
-              <div>No image uploaded.</div>
-          @endif
+           
 
           @error('image')
               <span class="invalid-feedback" role="alert">
@@ -323,7 +316,7 @@
           </div>
     
           <div>
-            <button type="submit" class="formbold-btn w-full">Create Famille</button>
+            <button type="submit" class="formbold-btn w-full">update Famille</button>
           </div>
         </form>
       </div>

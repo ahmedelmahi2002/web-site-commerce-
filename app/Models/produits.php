@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\sous_famille;
+use App\Models\marques;
+use App\Models\unites;
 
 class produits extends Model
 {
@@ -12,17 +15,17 @@ class produits extends Model
     use HasFactory;
     public function sousFamille()
     {
-        return $this->belongsTo(SousFamille::class);
+        return $this->belongsTo(sous_famille::class);
     }
 
     public function marque()
     {
-        return $this->belongsTo(Marque::class);
+        return $this->belongsTo(Marques::class);
     }
 
     public function unite()
     {
-        return $this->belongsTo(Unite::class);
+        return $this->belongsTo(Unites::class);
     }
     public function detailsCommande()
     {

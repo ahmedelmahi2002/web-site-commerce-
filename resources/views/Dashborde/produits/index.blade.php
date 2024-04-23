@@ -7,24 +7,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Liste des Produits</title>
     <style>
-        #a{
-            position: relative;
-            left: 400px;
-            
+        #zz{
+           width: 70vw;
+           height: 70vh;
+           position: absolute;
+           left: 300px;
+           bottom: 100px;
         }
-        #table{
-            position: relative;
-            left: 200px;
-            top: 100px
+        #img{
+          width: 100%;
+          height: 170px;
+          border-radius: 5px;
         }
     </style>
 </head>
 <body>
-    <!-- resources/views/familles/index.blade.php -->
-
 
 
 
@@ -53,8 +52,8 @@
           </ul>
           <ul class="navbar-nav navbar-nav-right">
             <li class="nav-item d-none d-lg-flex">
-              <a class="nav-link" href="{{ route('sous_familles.create') }}">
-                <span class="btn btn-primary">+ Create new sous famille</span>
+              <a class="nav-link" href="{{ route('produits.create') }}">
+                <span class="btn btn-primary">+ Create new produite</span>
               </a>
             </li>
             <li class="nav-item dropdown d-none d-lg-flex">
@@ -222,57 +221,54 @@
 
 
 
-
-    
-
-    <div class="container" id="table">
-      
-     
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Libelle</th>
-                    <th>Image</th>
-                    <th>Famille</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($sousFamilles as $sousFamille)
-                <tr>
-                    <td>{{ $sousFamille->id }}</td>
-                    <td>{{ $sousFamille->libelle }}</td>
-                    <td>
-                        @if($sousFamille->image)
-                            <img src="{{ asset('storage/' . $sousFamille->image) }}" alt="{{ $sousFamille->libelle }}" style="max-width: 100px;">
-                        @else
-                            No Image
-                        @endif
-                    </td>
-                    <td>{{ $sousFamille->Famille->libelle }}</td>
+    <section class="content " id="zz" style="width: 1200px;">
+        <div class="body_scroll">
+           
+            <div class="container-fluid">
+                <div class="row clearfix">
+                  
                 
-
-
-
-                  
-                  
-                    <td>
-                        <a href="{{ route('sous_familles.show', $sousFamille->id) }}" class="btn btn-info">Show</a>
-                        <a href="{{ route('sous_familles.edit', $sousFamille->id) }}" class="btn btn-primary">Edit</a>
-                        <form action="{{ route('sous_familles.destroy', $sousFamille->id) }}" method="POST" style="display: inline;">
+             
+                
+               
+          
+                    @foreach ($produits as $produit)
+                    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
+                        <div class="card">
+                            <div class="body product_item">
+                              <img src="{{ asset('storage/' . $produit->image) }}" alt="Uploaded Image"  id="img">
+                                <div class="product_details">
+                                    
+                                    <ul class=" list-unstyled">
+                                        <li class="">codebarre: {{$produit->codebarre}}  </li>
+                                        <li class="">designation: {{$produit->designation}} </li>
+                                        <li class="">prix_ht: {{$produit->prix_ht}} </li>
+                                        <li class="">tva: {{$produit->tva}} </li>
+                                        <li class="">description: {{$produit->description}} </li>
+                                        <li><strong>Sous Famille:</strong> {{ $produit->sousFamille->libelle }}</li>
+                                        <li><strong>Marque:</strong> {{ $produit->marque->marque }}</li>
+                                        <li><strong>Unité:</strong> {{ $produit->unite->unite }}</li>
+                                    </ul>                                
+                                </div>
+                                <div class="action">
+                                    <a href="{{ route('produits.edit', $produit->id) }}" class="btn btn-primary">Edit</a>
+                        <a href="{{ route('produits.show', $produit->id) }}" class="btn btn-info">Show</a>
+                        <!-- Delete Button -->
+                        <form action="{{ route('produits.destroy', $produit->id) }}" method="POST" style="display: inline;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this sub-family?')">Delete</button>
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this famille?')">Delete</button>
                         </form>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
+                                </div>
+                            </div>
+                        </div>                
+                    </div>
+                    @endforeach
 
-
+                </div>
+            </div>
+        </div>
+    </section>
 </body>
 </html>
 @endsection

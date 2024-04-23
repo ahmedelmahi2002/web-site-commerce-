@@ -191,6 +191,28 @@
           .sm\:w-half {
             width: 50%;
           }
+          .card {
+          border-radius: 8px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+          margin: 20px auto;
+          max-width: 550px;
+          background: white;
+          padding: 20px;
+        }
+        .card h2 {
+          margin-bottom: 20px;
+        }
+        .pull-left {
+          float: left;
+        }
+        .pull-right {
+          float: right;
+        }
+        .clearfix::after {
+          content: "";
+          clear: both;
+          display: table;
+        }
         }
       </style>
 </head>
@@ -208,38 +230,35 @@
 
 
 
-    <div class="formbold-main-wrapper">
-      <!-- Author: FormBold Team -->
-      <!-- Learn More: https://formbold.com -->
-      <div class="formbold-form-wrapper">
-        <div class="pull-left">
-          <h2>Edit marque</h2>
-      </div>
-      <div class="pull-right">
-          <a class="btn btn-primary" href="{{ route('marques.index') }}">Back</a>
-      </div>
-        <form method="POST" action="{{ route('marques.update', $marques->id) }}" enctype="multipart/form-data" >
-          @csrf
-          @method('PUT')
-          <div class="formbold-mb-5">
-            <label for="libelle">marque</label>
-            <input id="marque"  class="formbold-form-input" type="text" class="form-control @error('marques') is-invalid @enderror" name="libelle" value="{{ old('marques', $marques->marque) }}" required autocomplete="marque" autofocus>
+  <div class="card">
+    <div class="pull-left">
+        <h2>Edit Marque</h2>
+    </div>
+    <div class="pull-right">
+        <a class="btn btn-primary" href="{{ route('marques.index') }}">Back</a>
+    </div>
+    <div class="clearfix"></div> <!-- Clear floats -->
+    
+    <form method="POST" action="{{ route('marques.update', $marques->id) }}" enctype="multipart/form-data">
+        @csrf
+        @method('PUT')
+        
+        <div class="formbold-mb-5">
+            <label for="marque">Marque</label>
+            <input id="marque" class="formbold-form-input" type="text" class="form-control @error('marque') is-invalid @enderror" name="marque" value="{{ old('marque', $marques->marque) }}" required autocomplete="marque" autofocus>
 
-            @error('marques')
+            @error('marque')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
             @enderror
-          </div>
-    
+        </div>
         
-    
-          <div>
-            <button type="submit" class="formbold-btn w-full">update marque</button>
-          </div>
-        </form>
-      </div>
-    </div>
+        <div>
+            <button type="submit" class="formbold-btn w-full">Update Marque</button>
+        </div>
+    </form>
+</div>
 
 
  

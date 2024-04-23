@@ -14,7 +14,8 @@ class SousFamilleController extends Controller
     public function index()
     {
         $sousFamilles = sous_famille::all();
-        return view('Dashborde.sous_familles.index', compact('sousFamilles'));
+        $familles = Famille::all();
+        return view('Dashborde.sous_familles.index', compact('sousFamilles','familles'));
         
     }
 
@@ -60,7 +61,7 @@ class SousFamilleController extends Controller
      */
     public function show(sous_famille $sousFamille)
     {
-        return view('sous_familles.show', compact('sousFamille'));
+        return view('Dashborde.sous_familles.show', compact('sousFamille'));
     }
 
     /**
@@ -87,23 +88,21 @@ class SousFamilleController extends Controller
          ]);
      
          if ($request->hasFile('image')) {
-             $image = $request->file('image');
-             $imageName = time() . '.' . $image->extension();
-             $image->storeAs('public/images', $imageName);
-             $sous_famille->image = $imageName;
-         }
-     
-         // Update the sous famille attributes
-         $sous_famille->libelle = $request->input('libelle');
-         // Remove this line, as we are not updating the 'image' attribute directly from request input
-         // $sous_famille->image = $request->input('image');
-         $sous_famille->famille_id = $request->input('famille_id');
-         $sous_famille->save();
-     
-         // Redirect back with success message
-         return redirect()->route('sous_familles.index')
-             ->with('success', 'Sub-family updated successfully.');
+            // Store the new image file
+            $imagePath = $request->file('image')->store('images', 'public');
+            // Update the image path attribute of the famille model
+            $sous_famille->image = $imagePath;
+        }
+
+        // Update other attributes
+        $sous_famille->libelle = $request->input('libelle');
+        $sous_famille->famille_id = $request->input('famille_id');
+        // Save the updated model
+        $sous_famille->save();
+
+        return redirect()->route('sous_familles.index');
      }
+     
      
 
     /**
